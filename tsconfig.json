@@ -4,8 +4,9 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "esModuleInterop": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "lib": ["ES2020"]
   },
-  "include": ["src/**/*.js"],
+  "include": ["src/**/*.js", "types/**/*.d.ts"],
   "exclude": ["eslint.config.js", "*.config.js"]
 }
