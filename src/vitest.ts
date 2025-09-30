@@ -1,15 +1,11 @@
-// @ts-check
-
+import type { Linter } from 'eslint';
 import vitestPlugin from '@vitest/eslint-plugin';
-import {ERROR, testFiles} from './config.js';
+import { ERROR, testFiles } from './config';
 
-/**
- * @type {Array<import('eslint').Linter.Config>}
- */
 export default [
   {
     plugins: {
-      vitest: vitestPlugin
+      vitest: vitestPlugin,
     },
     files: testFiles,
     rules: {
@@ -17,14 +13,14 @@ export default [
         ERROR,
         {
           fn: 'it',
-          withinDescribe: 'it'
-        }
+          withinDescribe: 'it',
+        },
       ],
-      'vitest/prefer-lowercase-title': [ERROR, {ignore: ['describe']}],
+      'vitest/prefer-lowercase-title': [ERROR, { ignore: ['describe'] }],
       'vitest/no-commented-out-tests': ERROR,
       'vitest/no-disabled-tests': ERROR,
       'vitest/no-focused-tests': ERROR,
-      'vitest/no-identical-title': ERROR
-    }
-  }
-];
+      'vitest/no-identical-title': ERROR,
+    },
+  },
+] as Linter.Config[];

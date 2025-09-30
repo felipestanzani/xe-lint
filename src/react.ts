@@ -1,33 +1,29 @@
-// @ts-check
-
+import type { Linter } from 'eslint';
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import sortDestructureKeys from 'eslint-plugin-sort-destructure-keys';
-import {ERROR, OFF} from './config.js';
+import { ERROR, OFF } from './config';
 
-/**
- * @type {Array<import('eslint').Linter.Config>}
- */
 export default [
   jsxA11yPlugin.flatConfigs.recommended,
-  /** @type {any} -- This is fine */ (reactPlugin.configs.flat.recommended),
+  reactPlugin.configs.flat.recommended as Linter.Config,
   {
     plugins: {
       'react-hooks': reactHooksPlugin,
-      'sort-destructure-keys': sortDestructureKeys
+      'sort-destructure-keys': sortDestructureKeys,
     },
     settings: {
       react: {
-        version: 'detect'
-      }
+        version: 'detect',
+      },
     },
     languageOptions: {
       parserOptions: {
         ecmaFeatures: {
-          jsx: true
-        }
-      }
+          jsx: true,
+        },
+      },
     },
     rules: {
       'jsx-a11y/label-has-associated-control': ERROR,
@@ -39,31 +35,31 @@ export default [
         // Since we throw on missing deps, it's not a question of whether or not
         // the deps are added, but rather if you have to do it manually or
         // automatically. Therefore go for the automatic fix.
-        {enableDangerousAutofixThisMayCauseInfiniteLoops: true}
+        { enableDangerousAutofixThisMayCauseInfiniteLoops: true },
       ],
       'react/react-in-jsx-scope': OFF,
-      'react/jsx-boolean-value': [ERROR, 'never', {always: []}],
+      'react/jsx-boolean-value': [ERROR, 'never', { always: [] }],
       'react/jsx-curly-brace-presence': [
         ERROR,
-        {props: 'never', children: 'ignore'}
+        { props: 'never', children: 'ignore' },
       ],
       'react/function-component-definition': [
         ERROR,
         {
           namedComponents: 'function-declaration',
-          unnamedComponents: 'arrow-function'
-        }
+          unnamedComponents: 'arrow-function',
+        },
       ],
       'react/jsx-handler-names': [
         ERROR,
         {
           eventHandlerPrefix: 'on',
-          eventHandlerPropPrefix: 'on'
-        }
+          eventHandlerPropPrefix: 'on',
+        },
       ],
       'react/jsx-no-bind': [
         ERROR,
-        {allowArrowFunctions: true, allowFunctions: true}
+        { allowArrowFunctions: true, allowFunctions: true },
       ],
       'react/jsx-no-target-blank': ERROR,
       'react/jsx-sort-props': [
@@ -71,14 +67,14 @@ export default [
         {
           locale: 'en',
           ignoreCase: true,
-          reservedFirst: ['key', 'ref']
-        }
+          reservedFirst: ['key', 'ref'],
+        },
       ],
       'react/no-access-state-in-setstate': ERROR,
       'react/no-direct-mutation-state': ERROR,
       'react/no-this-in-sfc': ERROR,
       'react/no-typos': ERROR,
-      'react/no-unstable-nested-components': [ERROR, {allowAsProps: true}],
+      'react/no-unstable-nested-components': [ERROR, { allowAsProps: true }],
       'react/no-unused-prop-types': ERROR,
       'react/no-unused-state': ERROR,
       'react/self-closing-comp': ERROR,
@@ -97,12 +93,12 @@ export default [
             '/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/',
             'everything-else',
             '/^render.+$/',
-            'render'
-          ]
-        }
+            'render',
+          ],
+        },
       ],
       'react/sort-prop-types': ERROR,
-      'sort-destructure-keys/sort-destructure-keys': ERROR
-    }
-  }
-];
+      'sort-destructure-keys/sort-destructure-keys': ERROR,
+    },
+  },
+] as Linter.Config[];

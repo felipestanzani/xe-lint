@@ -1,10 +1,6 @@
-// @ts-check
+import type { Linter } from 'eslint';
+import { ERROR, testFiles } from './config';
 
-import {ERROR, testFiles} from './config.js';
-
-/**
- * @type {Array<import('eslint').Linter.Config>}
- */
 export default [
   {
     files: testFiles,
@@ -15,9 +11,9 @@ export default [
           object: name,
           property: 'only',
           message:
-            'This should only be used for debugging and removed afterwards.'
-        }))
-      ]
-    }
-  }
-];
+            'This should only be used for debugging and removed afterwards.',
+        })),
+      ],
+    },
+  },
+] as Linter.Config[];
