@@ -1,4 +1,4 @@
-# eslint-config-molindo
+# xe-lint
 
 ## Goals
 
@@ -8,11 +8,11 @@
 
 ## Getting started
 
-1. `yarn add eslint eslint-config-molindo prettier --dev`
+1. `yarn add eslint xe-lint prettier --dev`
 2. Setup your project config in `eslint.config.mjs`:
 
 ```js
-import {getPresets} from 'eslint-config-molindo';
+import {getPresets} from 'xe-lint';
 
 export default [
   ...(await getPresets(
@@ -56,13 +56,13 @@ export default [
 4. To set up Prettier, add to your `package.json`:
 
 ```json
-"prettier": "eslint-config-molindo/.prettierrc.json"
+"prettier": "xe-lint/.prettierrc.json"
 ```
 
 5. If you use TypeScript, add to your `tsconfig.json`:
 
 ```json
-"extends": "eslint-config-molindo/tsconfig.json"
+"extends": "xe-lint/tsconfig.json"
 ```
 
 Happy linting!

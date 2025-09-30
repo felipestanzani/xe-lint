@@ -1,9 +1,9 @@
 {
-  "name": "eslint-config-molindo",
-  "version": "8.0.0",
-  "description": "Molindo ESLint config that implements our styleguide and helps to catch errors.",
-  "repository": "https://github.com/molindo/eslint-config-molindo",
-  "author": "Jan Amann <jam@molindo.at>",
+  "name": "xe-lint",
+  "version": "1.0.0",
+  "description": "ESLint config that implements our style guide and helps to catch errors. This is a fork of https://github.com/molindo/eslint-config-molindo",
+  "repository": "https://github.com/felipestanzani/xe-lint",
+  "author": "Felipe Stanzani <stanzani@gmail.com>",
   "type": "module",
   "license": "MIT",
   "main": "src/index.js",
@@ -21,6 +21,8 @@
     "tsconfig.json"
   ],
   "devDependencies": {
+    "@types/confusing-browser-globals": "^1.0.3",
+    "@types/eslint-plugin-tailwindcss": "^3.17.0",
     "eslint": "^9.0.0",
     "prettier": "^3.3.0",
     "tailwindcss": "^3.4.13",

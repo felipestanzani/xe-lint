@@ -1,6 +1,5 @@
 // @ts-check
 
-// @ts-expect-error -- False positive
 import importPlugin from 'eslint-plugin-import';
 // eslint-disable-next-line import/no-unresolved -- False positive
 import typescriptEslint from 'typescript-eslint';
@@ -8,13 +7,29 @@ import {ERROR, OFF, typescriptFiles} from './config.js';
 import javascript from './javascript.js';
 
 /**
- * @type {Array<import('eslint').Linter.Config>}
+ * @type {any[]}
  */
 export default [
   ...javascript,
 
-  typescriptEslint.configs.eslintRecommended,
-  ...typescriptEslint.configs.recommended,
+  ...typescriptEslint.configs.recommended.map((config) => {
+    const newConfig = {...config};
+    if ('plugins' in newConfig && newConfig.plugins) {
+      newConfig.plugins = {
+        ...(typeof newConfig.plugins === 'object' &&
+        !Array.isArray(newConfig.plugins)
+          ? newConfig.plugins
+          : {}),
+        '@typescript-eslint': typescriptEslint.plugin
+      };
+    } else {
+      // @ts-expect-error - plugins property type mismatch in legacy config
+      newConfig.plugins = {
+        '@typescript-eslint': typescriptEslint.plugin
+      };
+    }
+    return newConfig;
+  }),
   importPlugin.configs.typescript,
 
   {
@@ -27,8 +42,7 @@ export default [
     },
     languageOptions: {
       parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname
+        projectService: true
       }
     },
     rules: {
@@ -69,7 +83,6 @@ export default [
         {checksVoidReturn: {attributes: false}}
       ],
       // There are valid use cases for this
-      // https://github.com/molindo/eslint-config-molindo/issues/83
       '@typescript-eslint/no-empty-interface': OFF,
       '@typescript-eslint/no-empty-function': OFF,
       '@typescript-eslint/no-non-null-assertion': OFF,

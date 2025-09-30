@@ -2,7 +2,6 @@
 
 import js from '@eslint/js';
 import confusingBrowserGlobals from 'confusing-browser-globals';
-// @ts-expect-error -- False positive
 import importPlugin from 'eslint-plugin-import';
 import unicornPlugin from 'eslint-plugin-unicorn';
 import unusedImportsPlugin from 'eslint-plugin-unused-imports';
@@ -34,7 +33,6 @@ export default [
       'dot-notation': ERROR,
       eqeqeq: [ERROR, 'always', {null: 'ignore'}],
       'func-names': [ERROR, 'as-needed'],
-      // See discussion in https://github.com/molindo/eslint-config-molindo/issues/27
       'func-style': [ERROR, 'declaration', {allowArrowFunctions: false}],
       'unused-imports/no-unused-imports': ERROR,
       'import/named': ERROR,
@@ -93,8 +91,6 @@ export default [
       'spaced-comment': [
         ERROR,
         'always',
-        // Allow TypeScript reference imports with tripple slashes
-        // https://github.com/molindo/eslint-config-molindo/issues/69
         {
           line: {
             markers: ['/'],

@@ -9,7 +9,7 @@ import {ERROR} from './config.js';
 export default [
   {
     plugins: {
-      tailwindcss: tailwindcssPlugin
+      tailwindcss: /** @type {any} */ (tailwindcssPlugin)
     },
     rules: {
       'tailwindcss/classnames-order': ERROR,
