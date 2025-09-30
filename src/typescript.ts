@@ -1,31 +1,26 @@
-// @ts-check
-
+import type { Linter } from 'eslint';
 import importPlugin from 'eslint-plugin-import';
-// eslint-disable-next-line import/no-unresolved -- False positive
 import typescriptEslint from 'typescript-eslint';
-import {ERROR, OFF, typescriptFiles} from './config.js';
+import { ERROR, OFF, typescriptFiles } from './config.js';
 import javascript from './javascript.js';
 
-/**
- * @type {any[]}
- */
 export default [
   ...javascript,
 
   ...typescriptEslint.configs.recommended.map((config) => {
-    const newConfig = {...config};
+    const newConfig = { ...config };
     if ('plugins' in newConfig && newConfig.plugins) {
       newConfig.plugins = {
         ...(typeof newConfig.plugins === 'object' &&
         !Array.isArray(newConfig.plugins)
           ? newConfig.plugins
           : {}),
-        '@typescript-eslint': typescriptEslint.plugin
+        '@typescript-eslint': typescriptEslint.plugin,
       };
     } else {
       // @ts-expect-error - plugins property type mismatch in legacy config
       newConfig.plugins = {
-        '@typescript-eslint': typescriptEslint.plugin
+        '@typescript-eslint': typescriptEslint.plugin,
       };
     }
     return newConfig;
@@ -38,12 +33,12 @@ export default [
     // https://stackoverflow.com/a/64488474/343045
     files: typescriptFiles,
     settings: {
-      'import/resolver': 'typescript'
+      'import/resolver': 'typescript',
     },
     languageOptions: {
       parserOptions: {
-        projectService: true
-      }
+        projectService: true,
+      },
     },
     rules: {
       // The TypeScript compiler takes care of this
@@ -63,14 +58,14 @@ export default [
       '@typescript-eslint/prefer-optional-chain': ERROR,
       '@typescript-eslint/no-unnecessary-condition': ERROR,
       '@typescript-eslint/no-unused-expressions': ERROR,
-      '@typescript-eslint/array-type': [ERROR, {default: 'generic'}],
+      '@typescript-eslint/array-type': [ERROR, { default: 'generic' }],
       '@typescript-eslint/await-thenable': ERROR,
       '@typescript-eslint/ban-ts-comment': [
         ERROR,
         {
           'ts-expect-error': false, // This is sometimes necessary and a better alternative to ts-ignore
-          'ts-ignore': 'allow-with-description'
-        }
+          'ts-ignore': 'allow-with-description',
+        },
       ],
       // Avoid declaring the implied return type for React components
       '@typescript-eslint/explicit-module-boundary-types': OFF,
@@ -80,7 +75,7 @@ export default [
       '@typescript-eslint/no-inferrable-types': ERROR,
       '@typescript-eslint/no-misused-promises': [
         ERROR,
-        {checksVoidReturn: {attributes: false}}
+        { checksVoidReturn: { attributes: false } },
       ],
       // There are valid use cases for this
       '@typescript-eslint/no-empty-interface': OFF,
@@ -91,7 +86,7 @@ export default [
       '@typescript-eslint/switch-exhaustiveness-check': ERROR,
       '@typescript-eslint/explicit-member-accessibility': OFF,
       // Too restrictive
-      '@typescript-eslint/no-empty-object-type': OFF
-    }
-  }
-];
+      '@typescript-eslint/no-empty-object-type': OFF,
+    },
+  },
+] as Linter.Config[];

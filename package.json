@@ -6,16 +6,19 @@
   "author": "Felipe Stanzani <stanzani@gmail.com>",
   "type": "module",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "keywords": [
     "eslint",
     "eslintconfig"
   ],
   "scripts": {
-    "lint": "eslint src && prettier src --check",
-    "prepublish": "npm run lint"
+    "type-check": "tsc --noEmit",
+    "lint": "eslint --config eslint.config.dev.js src && prettier src --check",
+    "prepublish": "npm run lint && npm run type-check"
   },
   "files": [
+    "dist",
     "src",
     ".prettierrc.json",
     "tsconfig.json"

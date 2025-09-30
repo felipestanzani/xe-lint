@@ -1,15 +1,11 @@
-// @ts-check
-
+import type { Linter } from 'eslint';
 import jestPlugin from 'eslint-plugin-jest';
-import {ERROR, testFiles} from './config.js';
+import { ERROR, testFiles } from './config';
 
-/**
- * @type {Array<import('eslint').Linter.Config>}
- */
 export default [
   {
     plugins: {
-      jest: jestPlugin
+      jest: jestPlugin,
     },
     files: testFiles,
     rules: {
@@ -17,14 +13,14 @@ export default [
         ERROR,
         {
           fn: 'it',
-          withinDescribe: 'it'
-        }
+          withinDescribe: 'it',
+        },
       ],
-      'jest/prefer-lowercase-title': [ERROR, {ignore: ['describe']}],
+      'jest/prefer-lowercase-title': [ERROR, { ignore: ['describe'] }],
       'jest/no-commented-out-tests': ERROR,
       'jest/no-disabled-tests': ERROR,
       'jest/no-focused-tests': ERROR,
-      'jest/no-identical-title': ERROR
-    }
-  }
-];
+      'jest/no-identical-title': ERROR,
+    },
+  },
+] as Linter.Config[];
